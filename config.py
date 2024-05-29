@@ -1,24 +1,68 @@
 from fastapi import FastAPI
 from auth import auth_router
-from db.models import model_router
+from pydantic import BaseModel
+import uvicorn
+
+app = FastAPI()
+
 
 app = FastAPI()
 app.include_router(auth_router)
 
 @app.get("/")
+async def landing():
+    return {
+        "message": "This is landing page"
+    }
+
+class UserRequest(BaseModel):
+    name: str
+    email: str
+
+@app.get("/user")
+async def intro():
+    return {
+        "message": "this is user page"
+    }
+
+
+@app.get("/items")
 async def index():
-    return {"message": "Hello world"}
+    return {
+        "message": "this is items page"
+    }
+
+@app.post("/items")
+async def index():
+    return {
+        "message": "this is items request"
+    }
 
 
-@app.get("/product/{id}")
-async def indexing(id: int):
-    return {"message": f"Product - {id} "}
+@app.get("/user/{id}")
+async def intro(id: int):
+    return {
+        "message": f"user - {id}"
+    }
 
 
-@app.post("/product")
-async def post_product():
-    return {"message": "This is POST page"}
+@app.post("/user")
+async def intro():
+    return {
+        "message": "This is post request"
+    }
 
-@app.post("/test")
-async def index2():
-    return {"message": "this students POST page"}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

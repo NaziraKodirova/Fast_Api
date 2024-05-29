@@ -8,4 +8,3 @@ load_dotenv()
 ENGINE = create_engine(f'postgresql://{os.getenv('USER')}:{os.getenv('PASSWORD')}@{os.getenv('HOST')}/{os.getenv('NAME')}', echo=True)
 Base = declarative_base()
 Session = sessionmaker()
-
